@@ -3,6 +3,10 @@ package com.example.demo.entity;
 
 public class UserEntity {
 
+
+
+
+
     Long id;
     String name;
     String email;
