@@ -1,35 +1,34 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ScoreAuditLogEntity {
+public class ScoreAuditLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "visitor_id")
-    private VisitorEntity visitor;
+    private Visitor visitor;
 
     @ManyToOne
-    @JoinColumn(name = "rule_id")
-    private RiskRuleEntity appliedRule;
+    private RiskRule appliedRule;
 
     private Integer scoreChange;
     private String reason;
+
     private LocalDateTime loggedAt;
 
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.loggedAt = LocalDateTime.now();
     }
 }
