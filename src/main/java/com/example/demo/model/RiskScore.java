@@ -1,31 +1,31 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RiskScoreEntity {          
+public class RiskScore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "visitor_id")      
-    private VisitorEntity visitor;
+    private Visitor visitor;
 
     private Integer totalScore;
     private String riskLevel;
+
     private LocalDateTime evaluatedAt;
 
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.evaluatedAt = LocalDateTime.now();
     }
 }
