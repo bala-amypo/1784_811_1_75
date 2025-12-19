@@ -14,7 +14,7 @@ public class RiskScoreEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;  
 
     @OneToOne
     @JoinColumn(name = "visitor_id")      
