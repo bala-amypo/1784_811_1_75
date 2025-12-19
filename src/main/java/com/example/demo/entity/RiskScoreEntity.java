@@ -17,7 +17,7 @@ public class RiskScoreEntity {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "visitor_id")
+    @JoinColumn(name = "visitor_id")      
     private VisitorEntity visitor;
 
     private Integer totalScore;
