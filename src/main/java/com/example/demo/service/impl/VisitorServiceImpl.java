@@ -1,3 +1,12 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.model.Visitor;
+import com.example.demo.repository.VisitorRepository;
+import com.example.demo.service.VisitorService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class VisitorServiceImpl implements VisitorService {
 
@@ -7,14 +16,22 @@ public class VisitorServiceImpl implements VisitorService {
         this.repository = repository;
     }
 
+    @Override
     public Visitor save(Visitor visitor) {
         return repository.save(visitor);
     }
 
-    public List<Visitor> getAll() {
+    @Override
+    public List<Visitor> findAll() {
         return repository.findAll();
     }
 
+    @Override
+    public Visitor update(Visitor visitor) {
+        return repository.save(visitor);
+    }
+
+    @Override
     public void delete(Long id) {
         repository.deleteById(id);
     }
