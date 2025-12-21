@@ -1,19 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Visitor;
-
 import java.util.List;
 
 public interface VisitorService {
 
-    Visitor saveVisitor(Visitor visitor);
+    Visitor save(Visitor visitor);
 
-    List<Visitor> getAllVisitors();
+    List<Visitor> findAll();
 
-    Visitor getVisitorById(Long id);
-
-    void deleteVisitor(Long id);
+    Visitor findById(Long id);
 }
-
-
-
