@@ -16,14 +16,6 @@ public class RiskRule {
 
     private String ruleName;
 
-    /*
-     * Allowed values (as per requirement file):
-     * AFTER_HOURS
-     * FREQUENT_VISITS
-     * BLACKLIST
-     * KEYWORD
-     * CUSTOM
-     */
     private String ruleType;
 
     private Integer threshold;
