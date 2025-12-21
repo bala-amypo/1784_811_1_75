@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +22,8 @@ public class RiskScore {
     private Visitor visitor;
 
     private Integer totalScore;
+
     private String riskLevel;
+
     private LocalDateTime evaluatedAt;
 }
