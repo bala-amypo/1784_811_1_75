@@ -1,52 +1,33 @@
-package com.example.demo.model;
+package com.example.demo.controller;
 
-import jakarta.persistence.*;
+import com.example.demo.model.VisitLog;
+import com.example.demo.service.VisitLogService;
+import org.springframework.web.bind.annotation.*;
 
-@Entity
-public class VisitLog {
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@RestController
+@RequestMapping("/visitlogs")
+public class VisitLogController {
 
-    private String ipAddress;
-    private String location;
+    private final VisitLogService visitLogService;
 
-    @ManyToOne
-    @JoinColumn(name = "visitor_id")
-    private Visitor visitor;
-
-    public VisitLog() {}
-
-    public Long getId() {
-        return id;
+    public VisitLogController(VisitLogService visitLogService) {
+        this.visitLogService = visitLogService;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @PostMapping
+    public VisitLog create(@RequestBody VisitLog visitLog) {
+        return visitLogService.save(visitLog);
     }
 
-    public String getIpAddress() {
-        return ipAddress;
+    @GetMapping
+    public List<VisitLog> getAll() {
+        return visitLogService.findAll();
     }
 
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Visitor getVisitor() {
-        return visitor;
-    }
-
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
+    @GetMapping("/{id}")
+    public VisitLog getById(@PathVariable Long id) {
+        return visitLogService.findById(id);
     }
 }
