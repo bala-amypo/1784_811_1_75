@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/visitors")
+@RequestMapping("/api/visitors")
 public class VisitorController {
 
     private final VisitorService service;
@@ -16,27 +16,25 @@ public class VisitorController {
         this.service = service;
     }
 
-    // CREATE
+    // POST /api/visitors
     @PostMapping
-    public Visitor create(@RequestBody Visitor visitor) {
+    public Visitor createVisitor(@RequestBody Visitor visitor) {
         return service.save(visitor);
     }
 
-    // READ
+    // GET /api/visitors
     @GetMapping
-    public List<Visitor> getAll() {
+    public List<Visitor> getAllVisitors() {
         return service.findAll();
     }
 
-    // UPDATE
-    @PostMapping("/update")
-    public Visitor update(@RequestBody Visitor visitor) {
-        return service.update(visitor);
-    }
-
-    // DELETE
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    // GET /api/visitors/{id}
+    @GetMapping("/{id}")
+    public Visitor getVisitorById(@PathVariable Long id) {
+        return service.findAll()
+                .stream()
+                .filter(v -> v.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }
