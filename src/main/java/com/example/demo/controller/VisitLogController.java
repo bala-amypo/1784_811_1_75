@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.VisitLog;
 import com.example.demo.service.VisitLogService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
