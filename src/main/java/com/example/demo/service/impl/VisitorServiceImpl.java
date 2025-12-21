@@ -10,29 +10,25 @@ import java.util.List;
 @Service
 public class VisitorServiceImpl implements VisitorService {
 
-    private final VisitorRepository repository;
+    private final VisitorRepository visitorRepository;
 
-    public VisitorServiceImpl(VisitorRepository repository) {
-        this.repository = repository;
+    public VisitorServiceImpl(VisitorRepository visitorRepository) {
+        this.visitorRepository = visitorRepository;
     }
 
-    @Override
-    public Visitor save(Visitor visitor) {
-        return repository.save(visitor);
+    public Visitor saveVisitor(Visitor visitor) {
+        return visitorRepository.save(visitor);
     }
 
-    @Override
-    public List<Visitor> findAll() {
-        return repository.findAll();
+    public List<Visitor> getAllVisitors() {
+        return visitorRepository.findAll();
     }
 
-    @Override
-    public Visitor update(Visitor visitor) {
-        return repository.save(visitor);
+    public Visitor getVisitorById(Long id) {
+        return visitorRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void deleteVisitor(Long id) {
+        visitorRepository.deleteById(id);
     }
 }
