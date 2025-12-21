@@ -5,10 +5,9 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data                   // Generates getters, setters, toString, equals, and hashCode
-@NoArgsConstructor      // Generates a no-argument constructor
-@AllArgsConstructor     // Generates an all-argument constructor
-public class VisitLog {
+@Data                   
+@NoArgsConstructor      
+@AllArgsConstructor     
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
