@@ -4,7 +4,6 @@ import com.example.demo.model.VisitLog;
 import com.example.demo.repository.VisitLogRepository;
 import com.example.demo.service.VisitLogService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
