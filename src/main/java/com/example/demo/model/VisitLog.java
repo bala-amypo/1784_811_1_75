@@ -5,9 +5,9 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data                   // Generates getters, setters, toString, equals, and hashCode
-@NoArgsConstructor      // Generates a no-argument constructor
-@AllArgsConstructor     // Generates an all-argument constructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class VisitLog {
 
     @Id
@@ -22,4 +22,12 @@ public class VisitLog {
     private LocalDateTime exitTime;
     private String purpose;
     private String location;
+
+    // This method will be called automatically before persisting
+    @PrePersist
+    public void prePersist() {
+        if (entryTime == null) {
+            entryTime = LocalDateTime.now();
+        }
+    }
 }
