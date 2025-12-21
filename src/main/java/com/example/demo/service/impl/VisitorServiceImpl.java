@@ -16,19 +16,18 @@ public class VisitorServiceImpl implements VisitorService {
         this.visitorRepository = visitorRepository;
     }
 
-    public Visitor saveVisitor(Visitor visitor) {
+    @Override
+    public Visitor save(Visitor visitor) {
         return visitorRepository.save(visitor);
     }
 
-    public List<Visitor> getAllVisitors() {
+    @Override
+    public List<Visitor> findAll() {
         return visitorRepository.findAll();
     }
 
-    public Visitor getVisitorById(Long id) {
+    @Override
+    public Visitor findById(Long id) {
         return visitorRepository.findById(id).orElse(null);
-    }
-
-    public void deleteVisitor(Long id) {
-        visitorRepository.deleteById(id);
     }
 }
