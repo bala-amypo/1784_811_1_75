@@ -7,34 +7,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/visitors")
+@RequestMapping("/visitors")
 public class VisitorController {
 
-    private final VisitorService service;
+    private final VisitorService visitorService;
 
-    public VisitorController(VisitorService service) {
-        this.service = service;
+    public VisitorController(VisitorService visitorService) {
+        this.visitorService = visitorService;
     }
 
-    // POST /api/visitors
     @PostMapping
     public Visitor createVisitor(@RequestBody Visitor visitor) {
-        return service.save(visitor);
+        return visitorService.save(visitor);
     }
 
-    // GET /api/visitors
     @GetMapping
     public List<Visitor> getAllVisitors() {
-        return service.findAll();
+        return visitorService.findAll();
     }
 
-    // GET /api/visitors/{id}
     @GetMapping("/{id}")
     public Visitor getVisitorById(@PathVariable Long id) {
-        return service.findAll()
-                .stream()
-                .filter(v -> v.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return visitorService.findById(id);
     }
 }
