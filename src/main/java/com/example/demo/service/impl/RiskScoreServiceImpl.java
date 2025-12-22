@@ -48,4 +48,6 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     @Override
     public void delete(Long id) {
         RiskScore existingScore = riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"
+                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"}
+}
+
