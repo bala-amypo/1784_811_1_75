@@ -30,15 +30,18 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     @Override
     public RiskScore findById(Long id) {
         return riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "RiskScore with id " + id + " not found"
+                ));
     }
 
     @Override
     public RiskScore update(Long id, RiskScore riskScoreDetails) {
         RiskScore existingScore = riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "RiskScore with id " + id + " not found"
+                ));
 
-        // Update fields
         existingScore.setScoreValue(riskScoreDetails.getScoreValue());
         existingScore.setDescription(riskScoreDetails.getDescription());
 
@@ -48,6 +51,10 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     @Override
     public void delete(Long id) {
         RiskScore existingScore = riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"))}
-}
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "RiskScore with id " + id + " not found"
+                ));
 
+        riskScoreRepository.delete(existingScore);
+    }
+}
