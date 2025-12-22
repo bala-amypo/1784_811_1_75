@@ -27,7 +27,7 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor getVisitorById(Long id) {
-        return visitorRepository.findById(id).orElse(null); // no exception
+        return visitorRepository.findById(id).orElse(null);
     }
 
     @Override
