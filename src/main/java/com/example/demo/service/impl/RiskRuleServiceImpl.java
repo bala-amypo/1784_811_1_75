@@ -18,8 +18,8 @@ public class RiskRuleServiceImpl implements RiskRuleService {
     }
 
     @Override
-    public RiskRule save(RiskRule riskRule) {
-        return riskRuleRepository.save(riskRule);
+    public RiskRule save(RiskRule rule) {
+        return riskRuleRepository.save(rule);
     }
 
     @Override
@@ -30,26 +30,7 @@ public class RiskRuleServiceImpl implements RiskRuleService {
     @Override
     public RiskRule findById(Long id) {
         return riskRuleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskRule with id " + id + " not found"));
-    }
-
-    @Override
-    public RiskRule update(Long id, RiskRule riskRuleDetails) {
-        RiskRule existingRule = riskRuleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskRule with id " + id + " not found"));
-
-        // Update fields
-        existingRule.setName(riskRuleDetails.getName());
-        existingRule.setDescription(riskRuleDetails.getDescription());
-        existingRule.setScore(riskRuleDetails.getScore());
-
-        return riskRuleRepository.save(existingRule);
-    }
-
-    @Override
-    public void delete(Long id) {
-        RiskRule existingRule = riskRuleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("RiskRule with id " + id + " not found"));
-        riskRuleRepository.delete(existingRule);
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("RiskRule not found with id " + id));
     }
 }
