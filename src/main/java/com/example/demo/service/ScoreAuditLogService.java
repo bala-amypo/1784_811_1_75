@@ -32,7 +32,7 @@ public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
         return repository.findById(id);
     }
 
-    // ✅ THIS METHOD WAS MISSING
+  
     @Override
     public List<ScoreAuditLog> findByVisitorId(Long visitorId) {
         return repository.findByVisitorId(visitorId);
