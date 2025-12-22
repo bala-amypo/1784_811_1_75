@@ -30,26 +30,7 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public Visitor findById(Long id) {
         return visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
-    }
-
-    @Override
-    public Visitor update(Long id, Visitor visitorDetails) {
-        Visitor existingVisitor = visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
-
-        // Update fields
-        existingVisitor.setName(visitorDetails.getName());
-        existingVisitor.setEmail(visitorDetails.getEmail());
-        existingVisitor.setPhone(visitorDetails.getPhone());
-
-        return visitorRepository.save(existingVisitor);
-    }
-
-    @Override
-    public void delete(Long id) {
-        Visitor existingVisitor = visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
-        visitorRepository.delete(existingVisitor);
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Visitor not found with id " + id));
     }
 }
