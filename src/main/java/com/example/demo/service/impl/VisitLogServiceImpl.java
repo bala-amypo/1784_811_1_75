@@ -29,4 +29,4 @@ public class VisitLogServiceImpl implements VisitLogService {
     public VisitLog findById(Long id) {
         return visitLogRepository.findById(id).orElse(null);
     }
-}                   this is one of my impl should i cahange this 
+}                   
