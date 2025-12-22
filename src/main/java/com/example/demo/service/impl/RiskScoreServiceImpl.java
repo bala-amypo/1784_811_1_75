@@ -30,4 +30,4 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     public RiskScore findById(Long id) {
         return riskScoreRepository.findById(id).orElse(null);
     }
-}                
+}
