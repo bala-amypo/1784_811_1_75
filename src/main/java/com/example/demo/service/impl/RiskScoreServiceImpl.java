@@ -6,6 +6,7 @@ import com.example.demo.service.RiskScoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RiskScoreServiceImpl implements RiskScoreService {
@@ -27,7 +28,7 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     }
 
     @Override
-    public RiskScore findById(Long id) {
-        return riskScoreRepository.findById(id).orElse(null);
+    public Optional<RiskScore> findByVisitorId(Long visitorId) {
+        return riskScoreRepository.findByVisitorId(visitorId);
     }
 }
