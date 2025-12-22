@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
@@ -29,8 +28,6 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor findById(Long id) {
-        return visitorRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Visitor not found with id " + id));
+        return visitorRepository.findById(id).orElse(null);
     }
-}
+}                    this is one of my impl should i cahange this 
