@@ -1,12 +1,12 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.ScoreAuditLog;
 import com.example.demo.repository.ScoreAuditLogRepository;
 import com.example.demo.service.ScoreAuditLogService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
@@ -28,12 +28,24 @@ public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
     }
 
     @Override
-    public Optional<ScoreAuditLog> findById(Long id) {
-        return repository.findById(id);
+    public ScoreAuditLog findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ScoreAuditLog with id " + id + " not found"));
     }
 
     @Override
     public List<ScoreAuditLog> findByVisitorId(Long visitorId) {
-        return repository.findByVisitorId(visitorId);
+        List<ScoreAuditLog> logs = repository.findByVisitorId(visitorId);
+        if (logs.isEmpty()) {
+            throw new ResourceNotFoundException("No audit logs found for visitorId " + visitorId);
+        }
+        return logs;
+    }
+
+    @Override
+    public void delete(Long id) {
+        ScoreAuditLog log = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ScoreAuditLog with id " + id + " not found"));
+        repository.delete(log);
     }
 }
