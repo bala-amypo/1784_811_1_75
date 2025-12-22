@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.RiskScore;
 import com.example.demo.repository.RiskScoreRepository;
 import com.example.demo.service.RiskScoreService;
@@ -29,8 +28,6 @@ public class RiskScoreServiceImpl implements RiskScoreService {
 
     @Override
     public RiskScore findById(Long id) {
-        return riskScoreRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("RiskScore not found with id " + id));
+        return riskScoreRepository.findById(id).orElse(null);
     }
-}
+}                
