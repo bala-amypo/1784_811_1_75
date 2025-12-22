@@ -30,31 +30,7 @@ public class RiskScoreServiceImpl implements RiskScoreService {
     @Override
     public RiskScore findById(Long id) {
         return riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "RiskScore with id " + id + " not found"
-                ));
-    }
-
-    @Override
-    public RiskScore update(Long id, RiskScore riskScoreDetails) {
-        RiskScore existingScore = riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "RiskScore with id " + id + " not found"
-                ));
-
-        existingScore.setScoreValue(riskScoreDetails.getScoreValue());
-        existingScore.setDescription(riskScoreDetails.getDescription());
-
-        return riskScoreRepository.save(existingScore);
-    }
-
-    @Override
-    public void delete(Long id) {
-        RiskScore existingScore = riskScoreRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "RiskScore with id " + id + " not found"
-                ));
-
-        riskScoreRepository.delete(existingScore);
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("RiskScore not found with id " + id));
     }
 }
