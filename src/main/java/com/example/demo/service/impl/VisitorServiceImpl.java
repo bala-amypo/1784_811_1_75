@@ -1,11 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,38 +16,22 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    public Visitor save(Visitor visitor) {
+    public Visitor saveVisitor(Visitor visitor) {
         return visitorRepository.save(visitor);
     }
 
     @Override
-    public List<Visitor> findAll() {
+    public List<Visitor> getAllVisitors() {
         return visitorRepository.findAll();
     }
 
     @Override
-    public Visitor findById(Long id) {
-        return visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+    public Visitor getVisitorById(Long id) {
+        return visitorRepository.findById(id).orElse(null); // no exception
     }
 
     @Override
-    public Visitor update(Long id, Visitor visitorDetails) {
-        Visitor existingVisitor = visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
-
-        // Update fields
-        existingVisitor.setName(visitorDetails.getName());
-        existingVisitor.setEmail(visitorDetails.getEmail());
-        existingVisitor.setPhone(visitorDetails.getPhone());
-
-        return visitorRepository.save(existingVisitor);
-    }
-
-    @Override
-    public void delete(Long id) {
-        Visitor existingVisitor = visitorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
-        visitorRepository.delete(existingVisitor);
+    public void deleteVisitor(Long id) {
+        visitorRepository.deleteById(id);
     }
 }
