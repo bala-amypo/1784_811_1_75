@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.RiskScore;
 import com.example.demo.repository.RiskScoreRepository;
 import com.example.demo.service.RiskScoreService;
@@ -28,6 +29,23 @@ public class RiskScoreServiceImpl implements RiskScoreService {
 
     @Override
     public RiskScore findById(Long id) {
-        return riskScoreRepository.findById(id).orElse(null);
+        return riskScoreRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"));
     }
-}
+
+    @Override
+    public RiskScore update(Long id, RiskScore riskScoreDetails) {
+        RiskScore existingScore = riskScoreRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"));
+
+        // Update fields
+        existingScore.setScoreValue(riskScoreDetails.getScoreValue());
+        existingScore.setDescription(riskScoreDetails.getDescription());
+
+        return riskScoreRepository.save(existingScore);
+    }
+
+    @Override
+    public void delete(Long id) {
+        RiskScore existingScore = riskScoreRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("RiskScore with id " + id + " not found"
