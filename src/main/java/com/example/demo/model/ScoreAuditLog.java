@@ -17,12 +17,12 @@ public class ScoreAuditLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many audit logs can belong to one visitor
+  
     @ManyToOne
     @JoinColumn(name = "visitor_id")
     private Visitor visitor;
 
-    // Many audit logs can refer to one risk rule
+    
     @ManyToOne
     @JoinColumn(name = "risk_rule_id")
     private RiskRule appliedRule;

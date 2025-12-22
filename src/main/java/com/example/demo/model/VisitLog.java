@@ -23,7 +23,7 @@ public class VisitLog {
     private String purpose;
     private String location;
 
-    // This method will be called automatically before persisting
+
     @PrePersist
     public void prePersist() {
         if (entryTime == null) {
