@@ -29,4 +29,4 @@ public class VisitLogServiceImpl implements VisitLogService {
     public VisitLog findById(Long id) {
         return visitLogRepository.findById(id).orElse(null);
     }
-}                   
+}
