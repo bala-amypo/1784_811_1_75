@@ -6,7 +6,6 @@ import com.example.demo.service.ScoreAuditLogService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
@@ -28,12 +27,7 @@ public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
     }
 
     @Override
-    public Optional<ScoreAuditLog> findById(Long id) {
-        return repository.findById(id);
+    public ScoreAuditLog findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
-
-    @Override
-    public List<ScoreAuditLog> findByVisitorId(Long visitorId) {
-        return repository.findByVisitorId(visitorId);
-    }
-}                           
+}
