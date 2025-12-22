@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
@@ -18,16 +20,21 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor save(Visitor visitor) {
+        if (visitor == null) {
+            throw new BadRequestException("Visitor cannot be null");
+        }
         return visitorRepository.save(visitor);
     }
 
     @Override
-    public List<Visitor> findAll() {
+    public List<Visitor> getAll() {
         return visitorRepository.findAll();
     }
 
     @Override
-    public Visitor findById(Long id) {
-        return visitorRepository.findById(id).orElse(null);
+    public Visitor getById(Long id) {
+        return visitorRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Visitor not found with id " + id));
     }
-}                    this is one of my impl should i cahange this 
+}
