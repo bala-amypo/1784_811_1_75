@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
@@ -20,21 +19,37 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor save(Visitor visitor) {
-        if (visitor == null) {
-            throw new BadRequestException("Visitor cannot be null");
-        }
         return visitorRepository.save(visitor);
     }
 
     @Override
-    public List<Visitor> getAll() {
+    public List<Visitor> findAll() {
         return visitorRepository.findAll();
     }
 
     @Override
-    public Visitor getById(Long id) {
+    public Visitor findById(Long id) {
         return visitorRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Visitor not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+    }
+
+    @Override
+    public Visitor update(Long id, Visitor visitorDetails) {
+        Visitor existingVisitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+
+        // Update fields
+        existingVisitor.setName(visitorDetails.getName());
+        existingVisitor.setEmail(visitorDetails.getEmail());
+        existingVisitor.setPhone(visitorDetails.getPhone());
+
+        return visitorRepository.save(existingVisitor);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Visitor existingVisitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+        visitorRepository.delete(existingVisitor);
     }
 }
