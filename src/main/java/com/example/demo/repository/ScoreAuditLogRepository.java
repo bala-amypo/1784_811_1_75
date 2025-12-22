@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ScoreAuditLogRepository extends JpaRepository<ScoreAuditLog, Long> {
 
-    // required by problem statement
+   
     List<ScoreAuditLog> findByVisitorId(Long visitorId);
 }
