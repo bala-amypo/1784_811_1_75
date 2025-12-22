@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
@@ -28,6 +29,27 @@ public class VisitorServiceImpl implements VisitorService {
 
     @Override
     public Visitor findById(Long id) {
-        return visitorRepository.findById(id).orElse(null);
+        return visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+    }
+
+    @Override
+    public Visitor update(Long id, Visitor visitorDetails) {
+        Visitor existingVisitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+
+        // Update fields
+        existingVisitor.setName(visitorDetails.getName());
+        existingVisitor.setEmail(visitorDetails.getEmail());
+        existingVisitor.setPhone(visitorDetails.getPhone());
+
+        return visitorRepository.save(existingVisitor);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Visitor existingVisitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor with id " + id + " not found"));
+        visitorRepository.delete(existingVisitor);
     }
 }
