@@ -32,6 +32,6 @@ public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
 
     @Override
     public List<ScoreAuditLog> findByVisitorId(Long visitorId) {
-        return repository.findByVisitorId(visitorId); // make sure repository has this
+        return repository.findByVisitorId(visitorId); 
     }
 }
