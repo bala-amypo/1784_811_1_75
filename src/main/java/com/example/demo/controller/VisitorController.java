@@ -19,24 +19,24 @@ public class VisitorController {
    
     @PostMapping("/save")
     public Visitor saveVisitor(@RequestBody Visitor visitor) {
-        return visitorService.saveVisitor(visitor); // <-- updated
+        return visitorService.saveVisitor(visitor); 
     }
 
   
     @GetMapping("/all")
     public List<Visitor> getAllVisitors() {
-        return visitorService.getAllVisitors(); // <-- updated
+        return visitorService.getAllVisitors(); 
     }
 
   
     @GetMapping("/{id}")
     public Visitor getVisitorById(@PathVariable Long id) {
-        return visitorService.getVisitorById(id); // <-- updated
+        return visitorService.getVisitorById(id); 
     }
 
     
     @DeleteMapping("/{id}")
     public void deleteVisitor(@PathVariable Long id) {
-        visitorService.deleteVisitor(id); // <-- updated
+        visitorService.deleteVisitor(id); 
     }
 }
