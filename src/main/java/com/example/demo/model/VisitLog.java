@@ -8,26 +8,26 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class VisitLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "visitor_id")
-    private Visitor visitor;
+    private String purpose;
+
+    private String location;
 
     private LocalDateTime entryTime;
 
     private LocalDateTime exitTime;
 
-    private String purpose;
-
-    private String location;
+    @ManyToOne
+    @JoinColumn(name = "visitor_id")
+    private Visitor visitor;
 
     @PrePersist
     public void prePersist() {
