@@ -10,6 +10,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder   // 🔥 REQUIRED for User.builder()
 @Table(name = "users")
 public class User {
 
@@ -17,9 +18,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔥 REQUIRED for login
+    // 🔥 Used for login
     @Column(unique = true, nullable = false)
-    private String username;
+    private String email;
 
     private String password;
 
