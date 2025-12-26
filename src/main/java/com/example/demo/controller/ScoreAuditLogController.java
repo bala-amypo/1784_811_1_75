@@ -41,6 +41,5 @@ public class ScoreAuditLogController {
     ) {
         return ResponseEntity.ok(service.getLog(id));
     }
-
     
 }
