@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface RiskScoreService {
 
-    RiskScore save(RiskScore riskScore);
+    RiskScore evaluateVisitor(Long visitorId);
 
-    List<RiskScore> findAll();
+    RiskScore getScoreForVisitor(Long visitorId);
 
-    RiskScore findById(Long id);
+    List<RiskScore> getAllScores();
 }
