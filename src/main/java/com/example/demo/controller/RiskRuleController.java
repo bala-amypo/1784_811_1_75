@@ -33,4 +33,10 @@ public class RiskRuleController {
     ) {
         return ResponseEntity.ok(riskRuleService.getRule(id));
     }
+
+    @GetMapping
+public ResponseEntity<List<RiskRule>> all() {
+    return ResponseEntity.ok(riskRuleService.findAll());
+}
+
 }
