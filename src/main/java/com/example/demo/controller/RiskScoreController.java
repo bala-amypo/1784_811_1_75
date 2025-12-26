@@ -38,9 +38,5 @@ public class RiskScoreController {
         return ResponseEntity.ok(riskScoreService.getAllScores());
     }
 
-    @GetMapping("/{id}")
-public ResponseEntity<RiskScore> get(@PathVariable Long id) {
-    return ResponseEntity.ok(riskScoreService.findById(id));
-}
-
+    
 }
