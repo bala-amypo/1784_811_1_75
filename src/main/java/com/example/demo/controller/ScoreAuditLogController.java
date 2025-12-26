@@ -41,4 +41,10 @@ public class ScoreAuditLogController {
     ) {
         return ResponseEntity.ok(service.getLog(id));
     }
+
+    @GetMapping("/visitor/{visitorId}")
+public ResponseEntity<List<ScoreAuditLog>> logsByVisitor(@PathVariable Long visitorId) {
+    return ResponseEntity.ok(scoreAuditLogService.findByVisitorId(visitorId));
+}
+
 }
