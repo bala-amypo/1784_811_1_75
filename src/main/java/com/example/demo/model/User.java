@@ -6,26 +6,23 @@ import lombok.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 🔥 REQUIRED for login
     @Column(unique = true, nullable = false)
-    private String email;
+    private String username;
 
-    @Column(nullable = false)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
     private Set<String> roles;
 }
