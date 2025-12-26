@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByEmail(String email);
+    // 🔥 REQUIRED for Spring Security login
+    Optional<User> findByUsername(String username);
 }
