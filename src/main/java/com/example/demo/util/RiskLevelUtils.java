@@ -3,23 +3,19 @@ package com.example.demo.util;
 public class RiskLevelUtils {
 
     private RiskLevelUtils() {
-        // Utility class – prevent object creation
+        // utility class → no object creation
     }
 
     public static String determineRiskLevel(int score) {
 
-        if (score >= 80) {
+        if (score < 20) {
+            return "LOW";
+        } else if (score < 50) {
+            return "MEDIUM";
+        } else if (score < 80) {
+            return "HIGH";
+        } else {
             return "CRITICAL";
         }
-
-        if (score >= 50) {
-            return "HIGH";
-        }
-
-        if (score >= 20) {
-            return "MEDIUM";
-        }
-
-        return "LOW";
     }
 }
