@@ -10,17 +10,14 @@ import java.util.List;
 
 public interface VisitLogRepository extends JpaRepository<VisitLog, Long> {
 
-    // ✅ REQUIRED for controller & tests
-    List<VisitLog> findByVisitorId(Long visitorId);
-
-    // Existing query (keep as is)
+    // Used in testVisitCountQuery_simulation
     @Query("SELECT v FROM VisitLog v WHERE v.visitor.id = :visitorId AND v.entryTime >= :since")
     List<VisitLog> findByVisitorSince(
             @Param("visitorId") Long visitorId,
             @Param("since") LocalDateTime since
     );
 
-    // Existing query (keep as is)
+    // Used in testCustomQuery_countVisitsInWindow
     @Query("SELECT COUNT(v) FROM VisitLog v WHERE v.visitor.id = :visitorId " +
            "AND v.entryTime BETWEEN :start AND :end")
     long countVisitsInWindow(
