@@ -5,11 +5,9 @@ import java.util.List;
 
 public interface ScoreAuditLogService {
 
-    ScoreAuditLog save(ScoreAuditLog log);
+    ScoreAuditLog logScoreChange(Long visitorId, Long ruleId, ScoreAuditLog log);
 
-    List<ScoreAuditLog> findAll();
+    List<ScoreAuditLog> getLogsByVisitor(Long visitorId);
 
-    ScoreAuditLog findById(Long id);
-
-    List<ScoreAuditLog> findByVisitorId(Long visitorId); // Add this method
+    ScoreAuditLog getLog(Long id);
 }
