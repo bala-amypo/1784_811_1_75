@@ -5,21 +5,23 @@ import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.AuthResponse;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.*;
-import com.example.demo.repository.*;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.*;
 import com.example.demo.service.impl.UserServiceImpl;
 import com.example.demo.util.RiskLevelUtils;
 
-import org.mockito.*;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @Test
@@ -27,20 +29,12 @@ import static org.mockito.Mockito.*;
 public class VisitorRiskEngineIntegrationTest {
 
     // ================= MOCKS =================
-
-    @Mock private VisitorRepository visitorRepository;
-    @Mock private VisitLogRepository visitLogRepository;
-    @Mock private RiskRuleRepository riskRuleRepository;
-    @Mock private RiskScoreRepository riskScoreRepository;
-    @Mock private ScoreAuditLogRepository scoreAuditLogRepository;
     @Mock private UserRepository userRepository;
-
     @Mock private VisitorService visitorService;
     @Mock private VisitLogService visitLogService;
     @Mock private RiskRuleService riskRuleService;
     @Mock private RiskScoreService riskScoreService;
     @Mock private ScoreAuditLogService scoreAuditLogService;
-
     @Mock private JwtTokenProvider jwtTokenProvider;
 
     private AuthController authController;
@@ -51,7 +45,6 @@ public class VisitorRiskEngineIntegrationTest {
     private ScoreAuditLogController scoreAuditLogController;
 
     // ================= SETUP =================
-
     @BeforeClass
     public void setup() {
         MockitoAnnotations.openMocks(this);
@@ -70,8 +63,7 @@ public class VisitorRiskEngineIntegrationTest {
         scoreAuditLogController = new ScoreAuditLogController(scoreAuditLogService);
     }
 
-    // ================= BASIC SMOKE =================
-
+    // ================= BASIC =================
     @Test(priority = 1)
     public void testControllersCreated() {
         Assert.assertNotNull(visitorController);
@@ -79,7 +71,6 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= VISITOR =================
-
     @Test(priority = 2)
     public void testCreateVisitor() {
         Visitor v = Visitor.builder().fullName("Alice").phone("999").idProof("ID1").build();
@@ -99,19 +90,16 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= VISIT LOG =================
-
     @Test(priority = 4)
     public void testCreateVisitLog() {
-        VisitLog log = VisitLog.builder().purpose("Meet").location("Gate").build();
         when(visitLogService.createVisitLog(eq(1L), any()))
                 .thenReturn(VisitLog.builder().id(10L).build());
 
-        ResponseEntity<VisitLog> resp = visitLogController.create(1L, log);
+        ResponseEntity<VisitLog> resp = visitLogController.create(1L, new VisitLog());
         Assert.assertEquals(resp.getBody().getId().longValue(), 10L);
     }
 
     // ================= RISK RULE =================
-
     @Test(priority = 5)
     public void testCreateRiskRule() {
         RiskRule rule = RiskRule.builder().ruleName("AfterHours").build();
@@ -122,7 +110,6 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= RISK SCORE =================
-
     @Test(priority = 6)
     public void testEvaluateRiskScore() {
         when(riskScoreService.evaluateVisitor(1L))
@@ -133,7 +120,6 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= AUTH =================
-
     @Test(priority = 7)
     public void testRegisterUser() {
         RegisterRequest req = new RegisterRequest();
@@ -162,7 +148,6 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= UTILS =================
-
     @Test(priority = 9)
     public void testRiskLevelUtils() {
         Assert.assertEquals(RiskLevelUtils.determineRiskLevel(0), "LOW");
@@ -172,7 +157,6 @@ public class VisitorRiskEngineIntegrationTest {
     }
 
     // ================= FINAL =================
-
     @Test(priority = 10)
     public void finalSmokeTest() {
         Assert.assertNotNull(riskRuleController);
