@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version> <!-- Use the latest Spring Boot version -->
+        <version>3.2.1</version> <!-- Use latest Spring Boot version -->
         <relativePath/>
     </parent>
 
@@ -26,7 +26,6 @@
     </properties>
 
     <dependencies>
-
         <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,7 +80,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.8.1</version>
+            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -102,7 +101,6 @@
 
     <build>
         <plugins>
-
             <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -119,7 +117,6 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
