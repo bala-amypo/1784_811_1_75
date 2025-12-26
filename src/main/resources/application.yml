@@ -1,0 +1,3 @@
+jwt:
+  secret: my-secret-key-123456
+  expiration: 86400000
