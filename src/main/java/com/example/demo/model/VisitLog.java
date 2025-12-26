@@ -2,10 +2,13 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class VisitLog {
@@ -19,15 +22,17 @@ public class VisitLog {
     private Visitor visitor;
 
     private LocalDateTime entryTime;
-    private LocalDateTime exitTime;
-    private String purpose;
-    private String location;
 
+    private LocalDateTime exitTime;
+
+    private String purpose;
+
+    private String location;
 
     @PrePersist
     public void prePersist() {
-        if (entryTime == null) {
-            entryTime = LocalDateTime.now();
+        if (this.entryTime == null) {
+            this.entryTime = LocalDateTime.now();
         }
     }
 }
