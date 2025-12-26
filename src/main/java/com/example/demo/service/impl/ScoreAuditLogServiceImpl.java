@@ -1,44 +1,41 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.ScoreAuditLog;
 import com.example.demo.repository.ScoreAuditLogRepository;
 import com.example.demo.service.ScoreAuditLogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ScoreAuditLogServiceImpl implements ScoreAuditLogService {
 
     private final ScoreAuditLogRepository repository;
 
-    public ScoreAuditLogServiceImpl(ScoreAuditLogRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
-    public ScoreAuditLog save(ScoreAuditLog log) {
+    public ScoreAuditLog logScoreChange(Long visitorId, Long ruleId, ScoreAuditLog log) {
+
+        if (log.getReason() == null || log.getReason().isBlank()) {
+            throw new IllegalArgumentException("reason required");
+        }
+
+        if (log.getScoreChange() < 0) {
+            throw new IllegalArgumentException("Invalid score change");
+        }
+
         return repository.save(log);
     }
 
     @Override
-    public List<ScoreAuditLog> findAll() {
-        return repository.findAll();
+    public List<ScoreAuditLog> getLogsByVisitor(Long visitorId) {
+        return repository.findByVisitorId(visitorId);
     }
 
     @Override
-    public ScoreAuditLog findById(Long id) {
+    public ScoreAuditLog getLog(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ScoreAuditLog not found with id: " + id));
-    }
-
-    @Override
-    public List<ScoreAuditLog> findByVisitorId(Long visitorId) {
-        List<ScoreAuditLog> logs = repository.findByVisitorId(visitorId);
-        if (logs.isEmpty()) {
-            throw new ResourceNotFoundException("No ScoreAuditLogs found for visitor id: " + visitorId);
-        }
-        return logs;
+                .orElseThrow(() -> new RuntimeException("not found"));
     }
 }
