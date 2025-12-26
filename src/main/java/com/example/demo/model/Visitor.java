@@ -3,14 +3,12 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Visitor {
 
     @Id
@@ -19,16 +17,9 @@ public class Visitor {
 
     private String fullName;
 
-    private String email;
-
     private String phone;
 
+    private String email;
+
     private String idProof;
-
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-    }
 }
