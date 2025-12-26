@@ -1,14 +1,14 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RiskScore {
@@ -26,4 +26,9 @@ public class RiskScore {
     private String riskLevel;
 
     private LocalDateTime evaluatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.evaluatedAt = LocalDateTime.now();
+    }
 }
