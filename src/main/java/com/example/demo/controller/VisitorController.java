@@ -33,4 +33,10 @@ public class VisitorController {
     public ResponseEntity<List<Visitor>> getAll() {
         return ResponseEntity.ok(visitorService.getAllVisitors());
     }
+
+    @GetMapping
+public ResponseEntity<List<Visitor>> all() {
+    return ResponseEntity.ok(visitorService.findAll());
+}
+
 }
