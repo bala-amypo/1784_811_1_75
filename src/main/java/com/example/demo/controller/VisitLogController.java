@@ -40,4 +40,11 @@ public class VisitLogController {
                 visitLogService.getLogsByVisitor(visitorId)
         );
     }
+
+@GetMapping("/visitor/{visitorId}")
+public ResponseEntity<List<VisitLog>> listByVisitor(@PathVariable Long visitorId) {
+    return ResponseEntity.ok(visitLogService.findByVisitorId(visitorId));
+}
+
+
 }
