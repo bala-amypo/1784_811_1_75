@@ -1,14 +1,14 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScoreAuditLog {
@@ -17,14 +17,12 @@ public class ScoreAuditLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  
     @ManyToOne
     @JoinColumn(name = "visitor_id")
     private Visitor visitor;
 
-    
     @ManyToOne
-    @JoinColumn(name = "risk_rule_id")
+    @JoinColumn(name = "rule_id")
     private RiskRule appliedRule;
 
     private Integer scoreChange;
@@ -33,9 +31,8 @@ public class ScoreAuditLog {
 
     private LocalDateTime loggedAt;
 
-   
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.loggedAt = LocalDateTime.now();
     }
 }
