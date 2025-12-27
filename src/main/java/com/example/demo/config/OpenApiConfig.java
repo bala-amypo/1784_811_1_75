@@ -18,7 +18,7 @@ public class OpenApiConfig {
                 .servers(List.of(
                         new Server().url("https://9380.pro604cr.amypo.ai/")
                 ))
-                // 🔑 Enable Authorize button
+             
                 .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
                 .components(
                         new io.swagger.v3.oas.models.Components()

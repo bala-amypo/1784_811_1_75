@@ -10,13 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig {
 
-    // Used in UserServiceImpl (password encoding)
+ 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Simple & test-friendly security setup
+ 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -29,7 +29,7 @@ public class SecurityConfig {
                         "/swagger-ui/**",
                         "/swagger-ui.html"
                 ).permitAll()
-                .anyRequest().permitAll()   // IMPORTANT: allows tests to pass
+                .anyRequest().permitAll()   
             );
 
         return http.build();
