@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public AuthResponse login(AuthRequest request) {
 
-        // In tests, login is mocked — keep simple
+        
         String token = jwtTokenProvider.createToken(1L, request.getEmail(), null);
         return new AuthResponse(token);
     }
